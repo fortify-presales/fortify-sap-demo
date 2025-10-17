@@ -99,3 +99,38 @@ Install abapGit: https://developers.sap.com/tutorials/abap-install-abapgit-plugi
 In Eclipse switch to the ABAP perspective.
 Select `New ABAP Project`, select the profile created for SAP GUI above and login as DEVELOPER
 
+# Initialising Transport Management System
+
+In order to be able to install the Fortify SAP Extractor you will need a working SAP Transport Management System.
+By default the container does not have a configured `/usr/sap/trans/bin/TP_DOMAIN_A4H.PFL`
+To create this carry out the following:
+
+1. Login using SAP GUI as DEVELOPER.
+2. Enter the transaction code `STMS`.
+3. Select "Menu -> Extras -> Delete TMS Configuration"
+4. Logout
+
+To recreate the TMS:
+
+1. Login using SAP GUI as SAP* to Client 00
+2. Enter the transaction code `STMS`.
+3. You will be prompted to Configure a new Transport Domain
+4. Click on Save icon and enter the usual password "ABAPtr2023#00" for the TMSADM user.
+3. Click on "Systems Overview" icon
+4. Click on "Update Configuration" configuration icon, then "Yes"
+5. Click on "Distribute and Activate TMS COnfiguration" icon
+
+# Installing Fortify SAP Extractor
+
+To install the Fortify SAP Extractor you will need the `SAP_Extracto.Zip` file from a Fortify SAST installation.
+For example: `C:\Fortify\OpenText_SAST_Fortify_25.4.0\Tools\`
+Copy this file to a directory, unzip its contents and then run the following commands:
+
+```
+docker cp SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
+docker cp SAP_Extractor\R900157.A4H a4h:/usr/sap/trans/data
+docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/cofiles
+docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/data
+```
+
+Go to the STMS top level again and click on "Import Overview" icon

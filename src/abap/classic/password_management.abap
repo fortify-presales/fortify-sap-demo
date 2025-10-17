@@ -1,0 +1,57 @@
+REPORT ZFTPSAP LINE-SIZE 132.
+
+DATA: BEGIN OF MTAB_DATA OCCURS 0,
+LINE(132) TYPE C,
+END OF MTAB_DATA.
+
+DATA: MC_PASSWORD(20) TYPE C,
+MI_KEY TYPE I VALUE 26101957,
+MI_PWD_LEN TYPE I,
+MI_HANDLE TYPE I.
+
+START-OF-SELECTION.
+
+*-- Your SAP-UNIX FTP password (case sensitive)
+MC_PASSWORD = 'password'.
+
+DESCRIBE FIELD MC_PASSWORD LENGTH MI_PWD_LEN.
+
+*-- FTP_CONNECT requires an encrypted password to work
+CALL 'AB_RFC_X_SCRAMBLE_STRING'
+     ID 'SOURCE' FIELD MC_PASSWORD ID 'KEY' FIELD MI_KEY
+     ID 'SCR' FIELD 'X' ID 'DESTINATION' FIELD MC_PASSWORD
+     ID 'DSTLEN' FIELD MI_PWD_LEN.
+
+CALL FUNCTION 'FTP_CONNECT'
+     EXPORTING
+*-- Your SAP-UNIX FTP user name (case sensitive)
+       USER            = 'userid'
+       PASSWORD        = MC_PASSWORD
+*-- Your SAP-UNIX server host name (case sensitive)
+       HOST            = 'unix-host'
+       RFC_DESTINATION = 'SAPFTP'
+     IMPORTING
+       HANDLE          = MI_HANDLE
+     EXCEPTIONS
+       NOT_CONNECTED   = 1
+       OTHERS          = 2.
+
+CALL FUNCTION 'FTP_COMMAND'
+     EXPORTING
+       HANDLE = MI_HANDLE
+* structural Command Injection
+       COMMAND = 'dir'
+     TABLES
+       DATA = MTAB_DATA
+     EXCEPTIONS
+       TCPIP_ERROR = 1
+
+       COMMAND_ERROR = 2
+       DATA_ERROR = 3
+       OTHERS = 4.
+
+CALL FUNCTION 'FTP_DISCONNECT'
+     EXPORTING
+       HANDLE = MI_HANDLE
+     EXCEPTIONS
+       OTHERS = 1. 
