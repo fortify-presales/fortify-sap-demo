@@ -110,6 +110,21 @@ To create this carry out the following:
 3. Select "Menu -> Extras -> Delete TMS Configuration"
 4. Logout
 
+Go to transaction STMS_IMPORT
+Menu: Extras → Other Requests → Add
+Enter transport request format: SIDK<number> (e.g., DSEK900262)
+Confirm and proceed
+
+Insert Transaction
+
+SE93 
+Enter Transaction Code: YSCA
+Click on Create
+Enter "Fortify ABAP Extractor" in Short Text field and select "Program and Selection Screen"
+Confirm and Proceed
+In Program, Select " "
+
+
 To recreate the TMS:
 
 1. Login using SAP GUI as SAP* to Client 00
