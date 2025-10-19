@@ -31,7 +31,8 @@ autoMemoryReclaim=gradual
 To run the SAP instance using docker compose, you should run the following command:
 
 ```bash
-docker compose up --remove-orphans sap
+docker compose up --remove-orphans sap -d
+docker compose logs --follow
 ```
 
 Note: The image is quite large, so the first time you run this it may take a while to download. The container will take a while to start as it has to initialize the database.
@@ -43,32 +44,38 @@ The system is ready when you see a line like:
   *** All services have been started. ***
 ```
 
-You can then connect to the system using the SAP GUI with the following parameters:
-
-- Application Server: localhost
-- Instance Number: 00
-- System ID: A4H
-- Client: 001
-- User: DEVELOPER
-- Password: ABAPtr2023#00
-
-To run bash inside the SAP container, you can run the following command:
+Check you can also run bash inside the SAP container, with the following command:
 
 ```bash
-docker compose exec sap /bin/bash
+docker exec -it a4h bash
 ```
 
 The logs inside the container are in the folder `/usr/sap/A4H/D00/log/`.
 
+You should then check you can connect to the system using the SAP GUI.
+To do this, create a new Login profile with the following settings:
+
+- System ID: `A4H`
+- Instance Number: `00`
+- Application Server: `127.0.0.1`
+
+Then Login using this profile and the following credentials:
+
+- Client: `001`
+- User: `DEVELOPER`
+- Password: `ABAPtr2023#00`
+
 ## Updating the license
 
-You can update the license using the SAP GUI as follows:
+To make use of the container you will need a license key. This can be carried out as follows:
 
-- Logon to your ABAP system with the user `SAP*`, client `000`, password `ABAPtr2023#00`.
-- Start the transaction SLICENSE
+- Retrieve the HARDWARE KEY for the container using the command:
+  `docker exec a4h su - a4hadm -c "saplicense -get"`
 - Copy the hardware key.
 - Get the license from minisap [https://go.support.sap.com/minisap/#/minisap], choosing the system A4H.
-- Back in your ABAP System, start SLICENSE again, then choose Install.
+- Click on Generate to download the file "A4H_Multiple.txt".
+- Logon to your ABAP system with the user `SAP*`, client `000`, password `ABAPtr2023#00`.
+- Start the transaction SLICENSE, the choose "Install"
 - Log off, then log on with the user DEVELOPER, client 001.
 - Start SLICENSE again; remove the old invalid licenses. (sap* is not allowed to delete licenses).
 
