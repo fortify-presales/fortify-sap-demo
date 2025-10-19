@@ -5,7 +5,7 @@ services:
   #   https://hub.docker.com/r/sapse/abap-cloud-developer-trial
   #################################################################################
   # Corresponding docker command:
-  # docker run --stop-timeout 3600 -it --name a4h -h vhcala4hci  sapse/abap-cloud-developer-trial:2023 -agree-to-sap-license
+  # docker run --stop-timeout 3600 -it --name a4h -h vhcala4hci -v /etc/localtime:/etc/localtime:ro sapse/abap-cloud-developer-trial:2023 -agree-to-sap-license
   sap:
     #build:
     #  context: .
@@ -18,6 +18,8 @@ services:
       - "30213:30213"
       - "50000:50000"
       - "50001:50001"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     tty: true
     container_name: a4h
     hostname: vhcala4hci
