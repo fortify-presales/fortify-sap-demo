@@ -26,7 +26,12 @@ localhostForwarding=true
 autoMemoryReclaim=gradual
 ```
 
-## SAP instance
+## Update your hosts file
+
+To be able to connect locally from the command line or browser to the SAP Container, you should
+update your hosts file to map `vhcala4hci` to `127.0.0.1`.
+
+## Start the SAP instance
 
 To run the SAP instance using docker compose, you should run the following command:
 
@@ -61,11 +66,11 @@ To do this, create a new Login profile with the following settings:
 
 Then Login using this profile and the following credentials:
 
-- Client: `001`
-- User: `DEVELOPER`
+- Client: `000`
+- User: `SAP*`
 - Password: `ABAPtr2023#00`
 
-## Updating the license
+## Install a license
 
 To make use of the container you will need a license key. This can be carried out as follows:
 
@@ -74,17 +79,74 @@ To make use of the container you will need a license key. This can be carried ou
 - Copy the hardware key.
 - Get the license from minisap [https://go.support.sap.com/minisap/#/minisap], choosing the system A4H.
 - Click on Generate to download the file "A4H_Multiple.txt".
-- Logon to your ABAP system with the user `SAP*`, client `000`, password `ABAPtr2023#00`.
-- Start the transaction SLICENSE, the choose "Install"
-- Log off, then log on with the user DEVELOPER, client 001.
-- Start SLICENSE again; remove the old invalid licenses. (sap* is not allowed to delete licenses).
+- Copy the file into the container using the command:
+  `docker cp A4H_Multiple.txt a4h:/opt/sap/ASABAP_license​`
+- Restart the container using the command:
+  ` docker compose restart`
+- When the container comes back up it should be licensed.
 
-You can optionally restart the container at this point
 
-## Update your hosts file
+#Then start the transaction `SLICENSE` to check the license(s) are valid.
 
-To be able to connect locally from the command line or browser to the SAP Container, you should
-update your hosts file to map `vhcala4hci` to `127.0.0.1`.
+# Install Fortify SAP Extractor
+
+To install the Fortify SAP Extractor we need to go to the SAP Transport Management System as follows
+and delete the current configuration:
+
+- Enter the transaction code `STMS`
+- Click on "Menu -> Extras -> Delete TMS Configuration"
+- Then clik on "Yes" to confirm
+- Once completed you will be prompted to "Configure TransPort Domain"
+- Click on "Save"
+- Enter the same password twice, you can use the login password, e.g. `ABAPtr2023#00`
+- Click on "Continue"
+- Click on "Menu -> System Overview"
+- Click on the "Update Configuration" icon and select "Yes"
+
+Once completed, copy the application's files into the container using the following commands:
+
+```
+docker cp SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
+docker cp SAP_Extractor\R900157.A4H a4h:/usr/sap/trans/data
+docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/cofiles
+docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/data
+```
+
+Now we can import the Fortify SAP Extractor using a request as follows: 
+
+- Enter the transaction code `STMS` if not already in the SAP Transport Management System
+- Click on "Import Ovweview" icon
+- Double click on the "A4H" import queue
+- Right click on the `A4HK900157` Request and select "Import"
+- For the "Target Client" field select `001`
+- On the "Execution"" tab select:
+  - Synchronous
+- On the "Options" tab select:
+  - Leave Transport Request in Queue for Later Import
+  - Ignore Invalid Component Version
+Click on Confirm, then "Yes" to start the import.
+Once finished Exit.
+
+Finally, to check the Fortify SAP ABAP Extractor has been installed logout and
+logon using the following credentials:
+
+- Client: `000`
+- User: `DEVELOPER`
+- Password: `ABAPtr2023#00`
+
+Finally, we need to create a new Transaction Code for the Fortify ABAP Extractor:
+
+- Enter the transaction code: `SE93`
+- Click on "Create"
+- Enter `YSCA` in the "Transaction" Code field
+- Enter "Fortify ABAP Extractor" in "Short Text" field
+- Select "Program and Selection Screen"
+- Click on "Continue"
+- In the "Program" field select ""
+
+## Import this project into the system using abapGit
+
+TBD
 
 ## How to connect to Fiori Launchpad
 
@@ -106,53 +168,3 @@ Install abapGit: https://developers.sap.com/tutorials/abap-install-abapgit-plugi
 In Eclipse switch to the ABAP perspective.
 Select `New ABAP Project`, select the profile created for SAP GUI above and login as DEVELOPER
 
-# Initialising Transport Management System
-
-In order to be able to install the Fortify SAP Extractor you will need a working SAP Transport Management System.
-By default the container does not have a configured `/usr/sap/trans/bin/TP_DOMAIN_A4H.PFL`
-To create this carry out the following:
-
-1. Login using SAP GUI as DEVELOPER.
-2. Enter the transaction code `STMS`.
-3. Select "Menu -> Extras -> Delete TMS Configuration"
-4. Logout
-
-Go to transaction STMS_IMPORT
-Menu: Extras → Other Requests → Add
-Enter transport request format: SIDK<number> (e.g., DSEK900262)
-Confirm and proceed
-
-Insert Transaction
-
-SE93 
-Enter Transaction Code: YSCA
-Click on Create
-Enter "Fortify ABAP Extractor" in Short Text field and select "Program and Selection Screen"
-Confirm and Proceed
-In Program, Select " "
-
-
-To recreate the TMS:
-
-1. Login using SAP GUI as SAP* to Client 00
-2. Enter the transaction code `STMS`.
-3. You will be prompted to Configure a new Transport Domain
-4. Click on Save icon and enter the usual password "ABAPtr2023#00" for the TMSADM user.
-3. Click on "Systems Overview" icon
-4. Click on "Update Configuration" configuration icon, then "Yes"
-5. Click on "Distribute and Activate TMS COnfiguration" icon
-
-# Installing Fortify SAP Extractor
-
-To install the Fortify SAP Extractor you will need the `SAP_Extracto.Zip` file from a Fortify SAST installation.
-For example: `C:\Fortify\OpenText_SAST_Fortify_25.4.0\Tools\`
-Copy this file to a directory, unzip its contents and then run the following commands:
-
-```
-docker cp SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
-docker cp SAP_Extractor\R900157.A4H a4h:/usr/sap/trans/data
-docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/cofiles
-docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/data
-```
-
-Go to the STMS top level again and click on "Import Overview" icon
