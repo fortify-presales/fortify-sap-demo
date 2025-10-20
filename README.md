@@ -106,8 +106,8 @@ and delete the current configuration:
 Once completed, copy the application's files into the container using the following commands:
 
 ```
-docker cp SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
-docker cp SAP_Extractor\R900157.A4H a4h:/usr/sap/trans/data
+docker cp files\SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
+docker cp files\SAP_Extractor\R900157.A4H a4h:/usr/sap/trans/data
 docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/cofiles
 docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/data
 ```
