@@ -197,6 +197,28 @@ Now we can Import the repository from GitHub as follows:
 - Enter `Z_FORTIFY_DEMO` for the "**Package**"
 - Enter `main` for the "**Branch**"
 - Select "**Prefix**" for the "**Folder Logic**"
+- Select "*Create Online Report**"
+- Once the repository has loaded click on "**Pull**" to download the files
+- You should be prompted that the objects are different between "local" and "remote", everything
+should be selected so just click on "Continue"
+- You will be prompted for a "workbech request", click on the "**Create Request**" icon and enter a name for the request, e.g. `Fortify SAP Demo Import` and click on "**Save**"
+- Click on "**Continue**"
+- Click on "**Continue**" again and then hopefully the files/objects should be imported
+
+To see (and edit) the files you can use the ABAP Workbench as follows
+
+- Enter the transaction code `se80` - the ABAP Workbench will open
+- Select "**Package**" in the Repository Browser and `Z_FORTIFY_DEMO` in the object file
+- Press return and the "**Z_FORTIFY_DEMO**  package should be shown with subpackages for the code.
+
+
+## How to connect from Eclipse ABAP Development Tools
+
+Install ADT: https://developers.sap.com/tutorials/abap-install-adt..html
+Install abapGit: https://developers.sap.com/tutorials/abap-install-abapgit-plugin.html
+
+In Eclipse switch to the ABAP perspective.
+Select `New ABAP Project`, select the profile created for SAP GUI above and login as DEVELOPER
 
 ## How to connect to Fiori Launchpad
 
@@ -209,12 +231,4 @@ Note: The first time you connect using a web browser, you may see a warning abou
 Login as: DEVELOPER/ABAPtr2023#00
 
 It might take a while to login the first time.
-
-## How to connect from Eclipse ABAP Development Tools
-
-Install ADT: https://developers.sap.com/tutorials/abap-install-adt..html
-Install abapGit: https://developers.sap.com/tutorials/abap-install-abapgit-plugin.html
-
-In Eclipse switch to the ABAP perspective.
-Select `New ABAP Project`, select the profile created for SAP GUI above and login as DEVELOPER
 
