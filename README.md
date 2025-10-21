@@ -1,10 +1,8 @@
 # Fortify SAP Demo
 
-This repository contains information on how to setup a [minisap](https://go.support.sap.com/minisap/#/minisap) environment using the [SAP ABAP Cloud Developer Trial container]: (https://hub.docker.com/r/sapse/abap-cloud-developer-trial) container.
+This repository contains information on how to setup a [minisap](https://go.support.sap.com/minisap/#/minisap) environment using the [SAP ABAP Cloud Developer Trial container](https://hub.docker.com/r/sapse/abap-cloud-developer-trial) container. It also contatins some sample ABAP code that can be scanned using [OpenText Application Security](https://www.opentext.com/en-gb/products/application-security) tools.
 
-In addition it also sample code and, documentation and scripts for scanning SAP applications using OpenText Application Security.
-
-Please bear in mind that while this repo is MIT licensed, the SAP licenses are not - Get the license from the following site, choosing the system A4H: SAP Licenses for Preview, Evaluation, and Demo Systems - [minisap](https://go.support.sap.com/minisap/#/minisap). 
+Please note: although this repo is MIT licensed, the SAP licenses are not - follow the instructions below to retrieve a license key. 
 
 ## Requirements
 
@@ -12,10 +10,17 @@ Please bear in mind that while this repo is MIT licensed, the SAP licenses are n
 - 4 CPUs
 - 150GB of disk space
 - Linux OS (or Windows with WSL2)
+- SAP GUI Windows or Java Client
+- Fortify SAP Extractor installation files
+- Eclipse IDE with ABAP Development Tools installed
+
+Note: the Fortify SAP Extractor installation files should be
+retrieved from an install of OpenText SAST - in the `tools\SAP_Extractor` directory. A copy of the files is stored in this
+repository for ease of use, but please check they are the latest versions before installing them.
 
 ## Configure Docker
 
-If using Docker Desktop and/or Windows with WSL2 increase the memory available by editing `$USERPROFILE\.wslconfig` and adding or amending the following:
+If using Docker Desktop and/or Windows with WSL2 increase the memory available by editing `$USERPROFILE\.wslconfig` file and adding or amending the following:
 
 ```
 [wsl2]
@@ -28,12 +33,15 @@ autoMemoryReclaim=gradual
 
 ## Update your hosts file
 
-To be able to connect locally from the command line or browser to the SAP Container, you should
-update your hosts file to map `vhcala4hci` to `127.0.0.1`.
+To be able to connect locally from the command line or browser to the SAP Container, you should update your hosts file to map `vhcala4hci`,to `127.0.0.1`, for example add a new line:
+
+```
+127.0.0.1   vhcala4hci
+```
 
 ## Start the SAP instance
 
-To run the SAP instance using docker compose, you should run the following command:
+To start the SAP instance using the "docker compose" command, you can run the following command(s):
 
 ```bash
 docker compose up --remove-orphans sap -d
@@ -41,7 +49,9 @@ docker compose logs --follow
 ```
 
 Note: The image is quite large, so the first time you run this it may take a while to download. The container will take a while to start as it has to initialize the database.
-The ABAP license supplied with the Docker image lasts only three months - see below for details on how to update it.
+
+The ABAP license supplied with the Docker image will be out of date so
+we will need to update it.
 
 The system is ready when you see a line like:
   
@@ -49,15 +59,17 @@ The system is ready when you see a line like:
   *** All services have been started. ***
 ```
 
-Check you can also run bash inside the SAP container, with the following command:
+You can also run bash inside the SAP container to check the logs, with the following command:
 
 ```bash
 docker exec -it a4h bash
 ```
 
-The logs inside the container are in the folder `/usr/sap/A4H/D00/log/`.
+The logs are in the folder `/usr/sap/A4H/D00/log/`.
 
-You should then check you can connect to the system using the SAP GUI.
+## Check SAP GUI Connection
+
+You should check that you can connect to the system using the SAP GUI.
 To do this, create a new Login profile with the following settings:
 
 - System ID: `A4H`
@@ -75,35 +87,36 @@ Then Login using this profile and the following credentials:
 To make use of the container you will need a license key. This can be carried out as follows:
 
 - Retrieve the HARDWARE KEY for the container using the command:
+
   `docker exec a4h su - a4hadm -c "saplicense -get"`
-- Copy the hardware key.
-- Get the license from minisap [https://go.support.sap.com/minisap/#/minisap], choosing the system A4H.
-- Click on Generate to download the file "A4H_Multiple.txt".
-- Copy the file into the container using the command:
+- Copy the hardware key
+- Get the license from [minisap](https://go.support.sap.com/minisap/#/minisap), choosing the system **A4H**
+- Click on Generate to download the file `A4H_Multiple.txt`
+- Copy this file into the container using the command:
+
   `docker cp A4H_Multiple.txt a4h:/opt/sap/ASABAP_license​`
 - Restart the container using the command:
-  ` docker compose restart`
-- When the container comes back up it should be licensed.
 
+  `docker compose restart`
+- When the container comes back up it should be licensed
 
-#Then start the transaction `SLICENSE` to check the license(s) are valid.
+Note: if you want to check the license key has been installed, you can enter the `SLICENSE` transaction code in the SAP GUI.
 
 # Install Fortify SAP Extractor
 
-To install the Fortify SAP Extractor we need to go to the SAP Transport Management System as follows
-and delete the current configuration:
+To install the Fortify SAP Extractor we first need to re-create the
+TMS configuration as follows:
 
+- If not already logged in, login from the SAP GUI as User `SAP*`, Client `000`
 - Enter the transaction code `STMS`
-- Click on "Menu -> Extras -> Delete TMS Configuration"
-- Then clik on "Yes" to confirm
-- Once completed you will be prompted to "Configure TransPort Domain"
-- Click on "Save"
-- Enter the same password twice, you can use the login password, e.g. `ABAPtr2023#00`
+- Click on "**Menu -> Extras -> Delete TMS Configuration**"
+- Then clik on "**Yes**" to confirm
+- Once completed you will be prompted to "**Configure TransPort Domain**"
+- Click on "**Save**"
+- Enter a password twice, you can re-use the login password, e.g. `ABAPtr2023#00`
 - Click on "Continue"
-- Click on "Menu -> System Overview"
-- Click on the "Update Configuration" icon and select "Yes"
 
-Once completed, copy the application's files into the container using the following commands:
+Once completed, copy the Fortify SAP Extractor's files into the container using the following commands:
 
 ```
 docker cp files\SAP_Extractor\K900157.A4H a4h:/usr/sap/trans/cofiles
@@ -112,41 +125,78 @@ docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/cofiles
 docker exec a4h chown -R a4hadm:sapsys /usr/sap/trans/data
 ```
 
-Now we can import the Fortify SAP Extractor using a request as follows: 
+Now we can import the Fortify SAP Extractor as follows: 
 
-- Enter the transaction code `STMS` if not already in the SAP Transport Management System
-- Click on "Import Ovweview" icon
-- Double click on the "A4H" import queue
-- Right click on the `A4HK900157` Request and select "Import"
-- For the "Target Client" field select `001`
-- On the "Execution"" tab select:
-  - Synchronous
-- On the "Options" tab select:
-  - Leave Transport Request in Queue for Later Import
-  - Ignore Invalid Component Version
-Click on Confirm, then "Yes" to start the import.
-Once finished Exit.
+- If not already in the SAP Transport Management System, enter the transaction code `STMS`
+- Click on the "Import Overview" icon
+- Double click on the "**A4H**" import queue
+- Select "**Menu -> Extras -> Other Requests -> Add**"
+- Click on the "Browse" icon
+- Select the `A4HK900157` Request and "Confirm"
+- Click on "Continue"
+- Click on "**Yes**"
+- Right-click on the new Request and select "**Import**" from the menu
+- For the "**Target Client**" field select `001`
+- On the "**Execution**" tab select:
+  - **Synchronous**
+- On the "**Options**" tab select:
+  - **Leave Transport Request in Queue for Later Import**
+  - **Ignore Invalid Component Version**
+- Click on "Confirm"
+- Select "**Yes**" to start the import - this might take a while!
+- Once finished "Exit" the TMS System.
 
-Finally, to check the Fortify SAP ABAP Extractor has been installed logout and
-logon using the following credentials:
+    >Although "installed" - Fortify ABAP Extractor program is not always visible,
+    if the program is not found below - try installing again with all Options selected 
+    to see if this works! TBD
+
+Finally, we need to create a new Transaction Code for the Fortify ABAP Extractor.
+Logout and logon as **DEVELOPER** using the following credentials:
 
 - Client: `000`
 - User: `DEVELOPER`
 - Password: `ABAPtr2023#00`
 
-Finally, we need to create a new Transaction Code for the Fortify ABAP Extractor:
+Then create the transaction code **YSCA** as follows:
 
 - Enter the transaction code: `SE93`
-- Click on "Create"
-- Enter `YSCA` in the "Transaction" Code field
-- Enter "Fortify ABAP Extractor" in "Short Text" field
-- Select "Program and Selection Screen"
-- Click on "Continue"
-- In the "Program" field select ""
+- Click on "**Create**"
+- Enter `YSCA` in the "**Transaction**" Code field
+- Enter `Fortify ABAP Extractor` in the "**Short Text**" field
+- Select "**Program and Selection Screen**"
+- Click on "**Continue**"
+- In the "**Program**" field click on the browse option and and select "**YHP_FORTIFY_SCA**"
+- Click on the "Save" icon.
+- Enter `$TMP` for the "**Package**` and click on "Save" again
+- Click on "Exit" twich
+- Finally enter the transaction code `YSCA` to confirm the program is available.
 
-## Import this project into the system using abapGit
 
-TBD
+## Import example code using abapGit
+
+[abapGit](https://abapgit.org/) is pre-installed in the container. We can use it to pull the example code contained in this repository for demonstration. 
+
+First create a transaction code **YGIT** as follows:
+
+- Enter the transaction code: `SE93`
+- Click on "**Create**"
+- Enter `YGIT` in the "**Transaction**" Code field
+- Enter `abapGit` in the "**Short Text**" field
+- Select "**Program and Selection Screen**"
+- Click on "**Continue**"
+- In the "**Program**" field click on the browse option and and select "**ZABAPGIT_STANDALONE**"
+- Click on the "Save" icon.
+- Enter `$TMP` for the "**Package**` and click on "Save" again
+- Click on "Exit" twich
+- Finally enter the transaction code `YGIT` to confirm the program is available.
+
+Now we can Import the repository from GitHub as follows:
+
+- Click on "New Online".
+- Enter `https://github.com/fortify-presales/fortify-sap-demo.git` for the "**Git Repository Url**
+- Enter `Z_FORTIFY_DEMO` for the "**Package**"
+- Enter `main` for the "**Branch**"
+- Select "**Prefix**" for the "**Folder Logic**"
 
 ## How to connect to Fiori Launchpad
 
