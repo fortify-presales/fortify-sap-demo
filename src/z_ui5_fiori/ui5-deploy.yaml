@@ -1,0 +1,26 @@
+specVersion: "3.1"
+metadata:
+  name: com.fortify.demo.zui5fiori
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        verbose: true
+        ignoreCertErrors: true
+        strictSSL: false
+        target:
+          url: http://minisap.onfortify.com:50000 # Add your SAP system URL here
+          client: "001"
+        app:
+          name: Z_DISCAPPRV
+          description: Discount Approvals
+          package: Z_FORTIFY_DEMO
+          transport: A4HK900168 # Add your transport number here
+        exclude:
+          - /test/
