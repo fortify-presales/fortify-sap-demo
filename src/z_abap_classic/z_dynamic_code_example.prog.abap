@@ -1,4 +1,4 @@
-REPORT  zdynamiccode.
+REPORT z_dynamic_code_example.
 
 TABLES rlgrap.
 
