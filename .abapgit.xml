@@ -18,6 +18,7 @@
     <item>/ppt/</item>
     <item>/software</item>
     <item>/SAP_Extractor/</item>
+    <item>/src/z_fiori_app/package.devc.xml</item>
    </IGNORE>
   </DATA>
  </asx:values>
