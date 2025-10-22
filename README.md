@@ -207,18 +207,24 @@ should be selected so just click on "Continue"
 
 To see (and edit) the files you can use the ABAP Workbench as follows
 
-- Enter the transaction code `se80` - the ABAP Workbench will open
+- Enter the transaction code `SE80` - the ABAP Workbench will open
 - Select "**Package**" in the Repository Browser and `Z_FORTIFY_DEMO` in the object file
 - Press return and the "**Z_FORTIFY_DEMO**  package should be shown with subpackages for the code.
 
 
-## How to connect from Eclipse ABAP Development Tools
+## Setup Eclipse ABAP Development Tools (ADT)
 
-Install ADT: https://developers.sap.com/tutorials/abap-install-adt..html
-Install abapGit: https://developers.sap.com/tutorials/abap-install-abapgit-plugin.html
+Although you can use the ABAP Workbench (`SE80`) to edit ABAP code, it is recommended to use
+the Eclipse ABAP Development Tools. In order to do this you should install the following:
 
-In Eclipse switch to the ABAP perspective.
-Select `New ABAP Project`, select the profile created for SAP GUI above and login as DEVELOPER
+  - [Eclipse IDE for Java Developers](https://www.eclipse.org/downloads/packages/)
+  - [ABAP Development Tools Plugin](https://developers.sap.com/tutorials/abap-install-adt.html)
+  - [abapGit Plugin](https://developers.sap.com/tutorials/abap-install-abapgit-plugin.html) (Optional)
+
+Note: the abapGit plugin will only work with a supported Cloud Environment, it cannot be used with the Container environment, however we can run abapGit from inside Eclipse using the `YGIT` transaction code as above.
+
+Once you have installed the above, in Eclipse switch to the ABAP perspective.
+Select `New ABAP Project`, select the profile created for the SAP GUI above and login as `DEVELOPER` as before. The code imported from abapGit above should be available in the `FORTIFY_SAP_DEMO` package.
 
 ## How to connect to Fiori Launchpad
 
@@ -232,3 +238,5 @@ Login as: DEVELOPER/ABAPtr2023#00
 
 It might take a while to login the first time.
 
+---
+kadraman (klee2@opentext.com)
