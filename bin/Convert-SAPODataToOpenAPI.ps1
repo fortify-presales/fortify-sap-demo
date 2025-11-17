@@ -1,6 +1,6 @@
 
 # ============================================================================
-# Script: GenOpenAPIDef.ps1
+# Script: Convert-SAPODataToOpenAPI.ps1
 # Description: Downloads OData metadata from SAP and converts it to OpenAPI 3.0 format
 # ============================================================================
 
@@ -23,14 +23,14 @@ add-type @"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 # ----------------------------------------------------------------------------
-# Check for odata-openapi3 tool
+# Check for odata-openapi tool
 # ----------------------------------------------------------------------------
-Write-Host "Checking for odata-openapi3 tool..." -ForegroundColor Cyan
+Write-Host "Checking for odata-openapi tool..." -ForegroundColor Cyan
 $odataToolExists = Get-Command odata-openapi3 -ErrorAction SilentlyContinue
 
 if (-not $odataToolExists) {
-    Write-Host "Error: odata-openapi3 tool is not installed." -ForegroundColor Red
-    Write-Host "Please install it using: npm install -g odata-openapi3" -ForegroundColor Yellow
+    Write-Host "Error: odata-openapi tool is not installed." -ForegroundColor Red
+    Write-Host "Please install it using: npm install -g odata-openapi" -ForegroundColor Yellow
     exit 1
 }
 Write-Host "odata-openapi3 tool found." -ForegroundColor Green
@@ -62,7 +62,15 @@ try {
 # Convert OData Metadata to OpenAPI 3.0 Format
 # ----------------------------------------------------------------------------
 Write-Host "Converting metadata to OpenAPI 3.0 format..." -ForegroundColor Cyan
-$outputFile = "abap_petstore.openapi3.json"
+
+# Ensure etc directory exists and set output file path
+$projectRoot = Split-Path -Parent $PSScriptRoot
+$etcDir = Join-Path $projectRoot "etc"
+if (-not (Test-Path $etcDir)) {
+    New-Item -ItemType Directory -Path $etcDir -Force | Out-Null
+    Write-Host "Created etc directory: $etcDir" -ForegroundColor Yellow
+}
+$outputFile = Join-Path $etcDir "abap_petstore.openapi3.json"
 
 try {
     odata-openapi3 $metadataFile --target $outputFile
