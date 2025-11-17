@@ -1,0 +1,9 @@
+@EndUserText.label: 'Service Definition for Petstore'
+define service ZSD_PetStore {
+  expose ZI_Pet         as Pets;
+  expose ZI_Customer    as Customers;
+  expose ZI_Order       as Orders;
+  expose ZI_PetCategory as PetCategory;
+  expose ZI_PetPhotoUrl as PetPhotoUrl;
+  expose ZI_PetTag      as PetTag;
+}

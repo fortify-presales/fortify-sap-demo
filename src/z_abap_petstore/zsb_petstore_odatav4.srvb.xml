@@ -4,30 +4,30 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>ZUI_PET_04_API</NAME>
+     <NAME>ZSB_PETSTORE_ODATAV4</NAME>
      <TYPE>SRVB/SVB</TYPE>
-     <DESCRIPTION>Web API Service Binding for Pet</DESCRIPTION>
+     <DESCRIPTION>Web API Service Binding for Petstore</DESCRIPTION>
      <RESPONSIBLE>DEVELOPER</RESPONSIBLE>
      <MASTER_LANGUAGE>EN</MASTER_LANGUAGE>
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>ZUI_PET_04_API</NAME>
+      <NAME>ZSB_PETSTORE_ODATAV4</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
      <BIND_TYPE_CATEGORY>1</BIND_TYPE_CATEGORY>
      <BIND_TYPE_VERSION>V4</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>ZUI_PET_04</SERVICE_NAME>
+       <SERVICE_NAME>ZSD_PETSTORE</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
          <RELEASE_STATE>NOT_RELEASED</RELEASE_STATE>
          <SRVD_REF>
-          <URI>/sap/bc/adt/ddic/srvd/sources/zui_pet_04</URI>
+          <URI>/sap/bc/adt/ddic/srvd/sources/zsd_petstore</URI>
           <TYPE>SRVD/SRV</TYPE>
-          <NAME>ZUI_PET_04</NAME>
+          <NAME>ZSD_PETSTORE</NAME>
          </SRVD_REF>
          <BIND_TYPE_DATA>
           <CONTENT>

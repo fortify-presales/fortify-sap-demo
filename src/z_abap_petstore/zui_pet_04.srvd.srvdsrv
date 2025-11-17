@@ -1,7 +1,0 @@
-@EndUserText.label: 'Service Definition for Pet'
-define service ZUI_PET_04 {
-  expose ZI_Pet         as Pet;
-  expose ZI_PetCategory as PetCategory;
-  expose ZI_PetPhotoUrl as PetPhotoUrl;
-  expose ZI_PetTag      as PetTag;
-}

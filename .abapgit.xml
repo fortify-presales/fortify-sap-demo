@@ -18,7 +18,7 @@
     <item>/software</item>
     <item>/SAP_Extractor/</item>
     <item>/src/z_abap_classic/abaplint.json</item>
-    <item>*.APLO.*</item>		
+    <item>*.APLO.*</item>
    </IGNORE>
   </DATA>
  </asx:values>

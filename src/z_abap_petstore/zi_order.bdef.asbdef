@@ -1,0 +1,39 @@
+managed implementation in class zbp_i_order unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_Order alias Order
+persistent table zorder
+draft table zorder_d
+lock master total etag last_changed_at
+etag master local_last_changed_at
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  association _Customer { create; with draft; }
+  association _Pet { create; with draft; }
+
+  field ( readonly ) Id;
+  field ( mandatory ) customer_id, pet_id, order_date, total_amount, currency;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zorder
+  {
+    id = id;
+    customer_id = customer_id;
+    pet_id = pet_id;
+    order_date = order_date;
+    total_amount = total_amount;
+    currency = currency;
+    last_changed_at = last_changed_at;
+    local_last_changed_at = local_last_changed_at;
+  }
+}

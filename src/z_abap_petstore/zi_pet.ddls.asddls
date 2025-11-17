@@ -1,4 +1,4 @@
-@EndUserText.label: 'Pet CDS View Entity'
+@EndUserText.label: 'Pet root CDS View Entity'
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 define root view entity ZI_Pet
   as select from zpet
