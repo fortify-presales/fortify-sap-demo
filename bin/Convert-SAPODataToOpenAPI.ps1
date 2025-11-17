@@ -47,7 +47,7 @@ $credential = New-Object System.Management.Automation.PSCredential($username, $s
 # Download OData Metadata
 # ----------------------------------------------------------------------------
 Write-Host "Downloading OData metadata from SAP system..." -ForegroundColor Cyan
-$metadataUri = "https://vhcala4hci:50001/sap/opu/odata4/sap/zui_pet_04_api/srvd_a2x/sap/zui_pet_04/0001/`$metadata?sap-client=001"
+$metadataUri = "https://vhcala4hci:50001/sap/opu/odata4/sap/zsb_petstore_odatav4/srvd_a2x/sap/zsd_petstore/0001/?sap-client=001"
 $metadataFile = "metadata.xml"
 
 try {
