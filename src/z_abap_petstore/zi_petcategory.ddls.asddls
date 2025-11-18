@@ -6,6 +6,7 @@ define view entity ZI_PetCategory as select from zpet_category
 {
   key pet_id,
   key cat_id,
+      name,
       _Pet,
       _CatType
 }

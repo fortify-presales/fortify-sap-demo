@@ -30,6 +30,11 @@ authorization master ( instance )
   {
     id = id;
     name = name;
+    sex = sex;
+    date_of_birth = date_of_birth;
+    description = description;
+    price = price;
+    currency = currency;
     status = status;
     last_changed_at = last_changed_at;
     local_last_changed_at = local_last_changed_at;
@@ -48,12 +53,13 @@ authorization dependent by _Pet
   association _Pet { with draft; }
 
   field ( readonly ) pet_id;
-  field ( mandatory ) cat_id;
+  field ( mandatory ) name;
 
   mapping for zpet_category
   {
     pet_id = pet_id;
     cat_id = cat_id;
+    name = name;
   }
 }
 

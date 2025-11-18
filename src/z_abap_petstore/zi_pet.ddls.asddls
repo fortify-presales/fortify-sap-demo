@@ -8,6 +8,12 @@ define root view entity ZI_Pet
 {
   key id,
       name,
+      sex,
+      date_of_birth,
+      description,
+      @Semantics.amount.currencyCode: 'currency'
+      price,
+      currency,
       status,
       last_changed_at,
       local_last_changed_at,

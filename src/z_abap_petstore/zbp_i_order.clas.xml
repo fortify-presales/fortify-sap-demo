@@ -6,10 +6,12 @@
     <CLSNAME>ZBP_I_ORDER</CLSNAME>
     <LANGU>E</LANGU>
     <DESCRIPT>Order Behavior Implementation Class</DESCRIPT>
+    <CATEGORY>06</CATEGORY>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
+    <CLSDEFINT>ZI_ORDER</CLSDEFINT>
    </VSEOCLASS>
   </asx:values>
  </asx:abap>
