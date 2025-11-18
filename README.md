@@ -230,26 +230,15 @@ Select `New ABAP Project`, select the profile created for the SAP GUI above and 
 
  - `Z_ABAP_CLASSIC` - some classic on-premise ABAP code with vulnerabilities
  - `Z_ABAP_CLOUD` - some ABAP for Cloud and RAP code with vulnerabilities
- - `Z_ABAP_PETSTORE` - a working demo application
+ - `Z_ABAP_PETSTORE` - sample SAP RAP OData V4 service
 
-## How to connect to Fiori Launchpad
-
-Open a browser window and navigate to:
-
-https://vhcala4hci:50001/sap/bc/ui2/flp?sap-client=001&sap-language=EN
-
-Note: The first time you connect using a web browser, you may see a warning about the security certificate.This is because the certificate is self-signed. You can ignore this warning and proceed to the website.
-
-loLogin gon as **DEVELOPER** using the following credentials:
-
-- User: `DEVELOPER`
-- Password: `ABAPtr2023#00`
-
-It might take a while to login and load the initial view the first time.
-
-## Deploying the PetStore Fiori App
+## Deploying ABAP PetStore service
 
 TBD
+
+## PetStore Fiori App
+
+There is a SAP Fiori UI5 App that can be using along side the Z_ABAP_PETSTORE application available [here](https://github.com/fortify-presales/fortify-fiori-demo). 
 
 ---
 kadraman (klee2@opentext.com)
