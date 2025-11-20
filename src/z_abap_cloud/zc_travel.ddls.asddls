@@ -1,5 +1,5 @@
-@Metadata.allowExtensions: true
 @EndUserText.label: 'Travel CDS View Entity (Projection)'
+@Metadata.allowExtensions: true
 @ObjectModel.semanticKey: [ 'TravelID' ]
 define root view entity ZC_Travel
   provider contract transactional_query
@@ -10,7 +10,8 @@ define root view entity ZC_Travel
   CustomerID,
   BeginDate,
   EndDate,
-  InternalComment, // this demonstrates sensitive field exposure (no @UI.hidden)
+  InternalComment, // Demonstrates sensitive field exposure (no @UI.hidden)
+  InternalUUID,  // Demonstrates sensitive field exposure (no @UI.hidden)
   CreatedBy,
   CreatedAt,
   LastChangedBy,

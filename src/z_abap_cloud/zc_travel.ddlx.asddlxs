@@ -68,7 +68,7 @@ annotate view ZC_Travel with
   } ]
   EndDate;
   
-  // this demonstrates sensitive field exposure (no @UI.hidden)
+  // Demonstrates sensitive field exposure (no @UI.hidden)
   @UI.lineItem: [ {
     position: 60 , 
     importance: #MEDIUM, 
@@ -79,6 +79,18 @@ annotate view ZC_Travel with
     label: 'InternalComment'
   } ]
   InternalComment;
+  
+  // Demonstrates sensitive field exposure (no @UI.hidden)
+  @UI.lineItem: [ {
+    position: 60 , 
+    importance: #MEDIUM, 
+    label: 'InternalUUID'
+  } ]
+  @UI.identification: [ {
+    position: 60 , 
+    label: 'InternalUUID'
+  } ]
+  InternalUUID;
   
   @UI.lineItem: [ {
     position: 70 , 

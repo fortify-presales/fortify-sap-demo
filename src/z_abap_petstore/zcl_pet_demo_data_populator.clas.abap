@@ -45,7 +45,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       id = 1
       name = 'Buddy'
       sex = 'M'
-      date_of_birth = '2018-01-15'
+      date_of_birth = CONV d( |20180115| )
       description = '<b>Buddy</b> is a playful dog.<br><i>Loves fetch!</i>'
       price = '250'
       currency = 'USD'
@@ -55,7 +55,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       id = 2
       name = 'Whiskers'
       sex = 'F'
-      date_of_birth = '2019-03-22'
+      date_of_birth = CONV d( |20190322| )
       description = '<b>Whiskers</b> is a curious cat.<br><i>Enjoys sunbathing.</i>'
       price = '180'
       currency = 'USD'
@@ -65,7 +65,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       id = 3
       name = 'Max'
       sex = 'M'
-      date_of_birth = '2017-07-09'
+      date_of_birth = CONV d( |20170709| )
       description = '<b>Max</b> is a loyal companion.<br><i>Great with kids.</i>'
       price = '300'
       currency = 'USD'
@@ -75,7 +75,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       id = 4
       name = 'Luna'
       sex = 'F'
-      date_of_birth = '2020-11-30'
+      date_of_birth = CONV d( |20201130| )
       description = '<b>Luna</b> is a gentle cat.<br><i>Loves to cuddle.</i>'
       price = '220'
       currency = 'USD'
@@ -85,7 +85,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       id = 5
       name = 'Charlie'
       sex = 'M'
-      date_of_birth = '2016-05-05'
+      date_of_birth = CONV d( |20160505| )
       description = '<b>Charlie</b> is an energetic dog.<br><i>Needs lots of exercise.</i>'
       price = '275'
       currency = 'USD'
