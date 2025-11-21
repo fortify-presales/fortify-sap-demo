@@ -1,0 +1,38 @@
+managed implementation in class zbp_i_ps_customer unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_PS_Customer alias Customer
+persistent table zps_customer
+draft table zps_customer_d
+lock master total etag last_changed_at
+etag master local_last_changed_at
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly ) Id;
+  field ( mandatory ) first_name, last_name, email;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zps_customer
+  {
+    id = id;
+    first_name = first_name;
+    last_name = last_name;
+    email = email;
+    phone = phone;
+    address = address;
+    city = city;
+    country = country;
+    last_changed_at = last_changed_at;
+    local_last_changed_at = local_last_changed_at;
+  }
+}
