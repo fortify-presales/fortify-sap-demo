@@ -3,8 +3,8 @@ strict ( 2 );
 with draft;
 
 define behavior for ZI_Customer alias Customer
-persistent table zcustomer
-draft table zcustomer_d
+persistent table zps_customer
+draft table zps_customer_d
 lock master total etag last_changed_at
 etag master local_last_changed_at
 authorization master ( instance )

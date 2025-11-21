@@ -1,7 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Customer CDS View Entity'
 define root view entity ZI_Customer 
-  as select from zcustomer
+  as select from zps_customer
 {
     key id,
     first_name,

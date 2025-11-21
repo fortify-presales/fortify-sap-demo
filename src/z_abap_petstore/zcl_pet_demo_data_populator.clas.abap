@@ -18,7 +18,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DELETE FROM zpet_tag_type.
     DELETE FROM zpet_photo_url.
     DELETE FROM zpet.
-    DELETE FROM zcustomer.
+    DELETE FROM zps_customer.
     DELETE FROM zorder.
 
     " Declare internal tables
@@ -28,7 +28,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DATA lt_photo_url    TYPE STANDARD TABLE OF zpet_photo_url.
     DATA lt_tag_type     TYPE STANDARD TABLE OF zpet_tag_type.
     DATA lt_pet_tag      TYPE STANDARD TABLE OF zpet_tag.
-    DATA lt_customer     TYPE STANDARD TABLE OF zcustomer.
+    DATA lt_customer     TYPE STANDARD TABLE OF zps_customer.
     DATA lt_order        TYPE STANDARD TABLE OF zorder.
 
     " Pet Category Types (must be inserted first for foreign key references)
@@ -141,11 +141,11 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     INSERT zpet_category     FROM TABLE @lt_pet_category.
     INSERT zpet_photo_url    FROM TABLE @lt_photo_url.
     INSERT zpet_tag          FROM TABLE @lt_pet_tag.
-    INSERT zcustomer        FROM TABLE @lt_customer.
+    INSERT zps_customer      FROM TABLE @lt_customer.
     IF sy-subrc <> 0.
-      out->write( |INSERT `zcustomer` failed, sy-subrc = { sy-subrc }| ).
+      out->write( |INSERT `zps_customer` failed, sy-subrc = { sy-subrc }| ).
     ELSE.
-      out->write( |INSERT `zcustomer` succeeded| ).
+      out->write( |INSERT `zps_customer` succeeded| ).
     ENDIF.
 
     INSERT zorder           FROM TABLE @lt_order.
@@ -162,9 +162,9 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DATA(lv_order_count)   = 0.
 
     SELECT COUNT( * ) FROM zpet      INTO @lv_pet_count.
-    SELECT COUNT( * ) FROM zcustomer INTO @lv_cust_count.
+    SELECT COUNT( * ) FROM zps_customer INTO @lv_cust_count.
     SELECT COUNT( * ) FROM zorder    INTO @lv_order_count.
-    out->write( |`zpet` rows={ lv_pet_count }  `zcustomer` rows={ lv_cust_count }  `zorder` rows={ lv_order_count }| ).
+    out->write( |`zpet` rows={ lv_pet_count }  `zps_customer` rows={ lv_cust_count }  `zorder` rows={ lv_order_count }| ).
 
   ENDMETHOD.
 

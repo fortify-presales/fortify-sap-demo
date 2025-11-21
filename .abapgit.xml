@@ -19,6 +19,34 @@
     <item>/SAP_Extractor/</item>
     <item>/src/z_abap_classic/abaplint.json</item>
     <item>*.APLO.*</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/451c0613f15edbc0f1195b372a5392ht.sush.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zapi_zfy_mcustomer_o4.srvb.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zapi_zfy_mcustomer_o4.srvd.srvdsrv</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zapi_zfy_mcustomer_o4.srvd.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zapi_zfy_mcustomer_o4_0001_g4ba.sco2.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zbp_c_fy_mcustomer.clas.abap</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zbp_c_fy_mcustomer.clas.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zbp_r_fy_mcustomer.clas.abap</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zbp_r_fy_mcustomer.clas.locals_imp.abap</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zbp_r_fy_mcustomer.clas.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.bdef.asbdef</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.bdef.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.dcls.asdcls</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.dcls.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.ddls.asddls</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.ddls.baseinfo</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zc_fy_mcustomer.ddls.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zfymcustomer.nont.json</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zfymcustomer.ront.json</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.bdef.asbdef</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.bdef.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.dcls.asdcls</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.dcls.xml</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.ddls.asddls</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.ddls.baseinfo</item>
+    <item>/src/z_abap_cloud/z_abap_cloud_managed/zr_fy_mcustomer.ddls.xml</item>
+    <item>/src/z_abap_petstore/zcustomer.tabl.xml</item>
+    <item>/src/z_abap_petstore/zcustomer_d.tabl.xml</item>
    </IGNORE>
   </DATA>
  </asx:values>
