@@ -4,7 +4,8 @@
   <asx:values>
    <DEVC>
     <CTEXT>RAP Unmanaged Scenario</CTEXT>
-    <PACKKIND>5</PACKKIND>
+    <LANGUAGE>E</LANGUAGE>
+    <MASTERLANG>E</MASTERLANG>
    </DEVC>
   </asx:values>
  </asx:abap>

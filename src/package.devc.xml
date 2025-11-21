@@ -4,6 +4,8 @@
   <asx:values>
    <DEVC>
     <CTEXT>Fortify ABAP Demo</CTEXT>
+    <LANGUAGE>E</LANGUAGE>
+    <MASTERLANG>E</MASTERLANG>
    </DEVC>
   </asx:values>
  </asx:abap>

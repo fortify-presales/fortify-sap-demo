@@ -1,0 +1,46 @@
+managed implementation in class ZBP_R_FY_MCUSTOMER unique;
+strict ( 2 );
+extensible;
+define behavior for ZR_FY_MCUSTOMER alias mcust
+persistent table ZFY_MCUSTOMER
+extensible
+etag master LastChangedAt
+lock master
+authorization master( global )
+{
+  field ( mandatory : create )
+   CustomerID;
+
+  field ( readonly )
+   CreatedBy,
+   CreatedAt,
+   LastChangedBy,
+   LastChangedAt;
+
+  field ( readonly : update )
+   CustomerID;
+
+
+  create;
+  update;
+  delete;
+
+  mapping for ZFY_MCUSTOMER corresponding extensible
+  {
+    CustomerID = customer_id;
+    FirstName = first_name;
+    LastName = last_name;
+    Email = email;
+    Phone = phone;
+    Address = address;
+    City = city;
+    Country = country;
+    DateOfBirth = date_of_birth;
+    IsActive = is_active;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+  }
+
+}

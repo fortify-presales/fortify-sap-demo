@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_FY_MCUSTOMER'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_FY_MCUSTOMER'
+  }
+}
+define service ZAPI_ZFY_MCUSTOMER_O4 provider contracts odata_v4_webapi {
+  expose ZC_FY_MCUSTOMER as mcust;
+}
