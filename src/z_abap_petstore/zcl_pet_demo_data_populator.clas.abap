@@ -19,7 +19,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DELETE FROM zpet_photo_url.
     DELETE FROM zpet.
     DELETE FROM zps_customer.
-    DELETE FROM zps_order.
+    DELETE FROM zorder.
 
     " Declare internal tables
     DATA lt_pet          TYPE STANDARD TABLE OF zpet.
@@ -29,7 +29,7 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DATA lt_tag_type     TYPE STANDARD TABLE OF zpet_tag_type.
     DATA lt_pet_tag      TYPE STANDARD TABLE OF zpet_tag.
     DATA lt_customer     TYPE STANDARD TABLE OF zps_customer.
-    DATA lt_order        TYPE STANDARD TABLE OF zps_order.
+    DATA lt_order        TYPE STANDARD TABLE OF zorder.
 
     " Pet Category Types (must be inserted first for foreign key references)
     APPEND VALUE #( cat_id = 1 name = 'DOG' caturl = 'https://example.com/dog.jpg' ) TO lt_cat_type.
@@ -148,11 +148,11 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
       out->write( |INSERT `zps_customer` succeeded| ).
     ENDIF.
 
-    INSERT zps_order           FROM TABLE @lt_order.
+    INSERT zorder           FROM TABLE @lt_order.
     IF sy-subrc <> 0.
-      out->write( |INSERT `zps_order` failed, sy-subrc = { sy-subrc }| ).
+      out->write( |INSERT `zorder` failed, sy-subrc = { sy-subrc }| ).
     ELSE.
-      out->write( |INSERT `zps_order` succeeded| ).
+      out->write( |INSERT `zorder` succeeded| ).
     ENDIF.
     COMMIT WORK.
 
@@ -161,10 +161,10 @@ CLASS zcl_pet_demo_data_populator IMPLEMENTATION.
     DATA(lv_cust_count)    = 0.
     DATA(lv_order_count)   = 0.
 
-    SELECT COUNT( * ) FROM zpet         INTO @lv_pet_count.
+    SELECT COUNT( * ) FROM zpet      INTO @lv_pet_count.
     SELECT COUNT( * ) FROM zps_customer INTO @lv_cust_count.
-    SELECT COUNT( * ) FROM zps_order    INTO @lv_order_count.
-    out->write( |`zpet` rows={ lv_pet_count }  `zps_customer` rows={ lv_cust_count }  `zps_order` rows={ lv_order_count }| ).
+    SELECT COUNT( * ) FROM zorder    INTO @lv_order_count.
+    out->write( |`zpet` rows={ lv_pet_count }  `zps_customer` rows={ lv_cust_count }  `zorder` rows={ lv_order_count }| ).
 
   ENDMETHOD.
 

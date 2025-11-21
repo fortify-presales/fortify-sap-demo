@@ -1,16 +1,13 @@
-CLASS zcl_legacy_call DEFINITION
-  PUBLIC FINAL CREATE PUBLIC.
-  PUBLIC SECTION.
-    METHODS call_legacy.
+class ZCL_LEGACY_CALL definition
+  public
+  create private .
+
+public section.
+protected section.
+private section.
 ENDCLASS.
 
-CLASS zcl_legacy_call IMPLEMENTATION.
 
-  METHOD call_legacy.
-    " Insecure call
-    CALL FUNCTION 'Z_LEGACY_CREATE_TRAVEL'
-      EXPORTING iv_data = 'TEST'.
-  ENDMETHOD.
 
+CLASS ZCL_LEGACY_CALL IMPLEMENTATION.
 ENDCLASS.
-

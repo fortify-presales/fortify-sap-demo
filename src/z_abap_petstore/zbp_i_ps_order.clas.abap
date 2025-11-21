@@ -1,14 +1,13 @@
-CLASS zbp_i_ps_order DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZBP_I_PS_ORDER definition
+  public
+  create private .
 
-  PUBLIC SECTION.
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+public section.
+protected section.
+private section.
 ENDCLASS.
 
 
 
-CLASS zbp_i_ps_order IMPLEMENTATION.
+CLASS ZBP_I_PS_ORDER IMPLEMENTATION.
 ENDCLASS.

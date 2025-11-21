@@ -1,14 +1,13 @@
-CLASS zbp_i_ps_customer DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZBP_I_PS_CUSTOMER definition
+  public
+  create private .
 
-  PUBLIC SECTION.
-  PROTECTED SECTION.
-  PRIVATE SECTION.
+public section.
+protected section.
+private section.
 ENDCLASS.
 
 
 
-CLASS zbp_i_ps_customer IMPLEMENTATION.
+CLASS ZBP_I_PS_CUSTOMER IMPLEMENTATION.
 ENDCLASS.
