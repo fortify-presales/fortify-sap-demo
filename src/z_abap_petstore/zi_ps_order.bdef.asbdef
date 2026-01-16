@@ -33,7 +33,6 @@ authorization master ( instance )
     order_date = order_date;
     total_amount = total_amount;
     currency = currency;
-    status = status;
     last_changed_at = last_changed_at;
     local_last_changed_at = local_last_changed_at;
   }

@@ -4,30 +4,30 @@
   <asx:values>
    <SRVB>
     <METADATA>
-     <NAME>ZSB_PETSTORE_ODATAV4</NAME>
+     <NAME>ZAPI_TRAVEL_04</NAME>
      <TYPE>SRVB/SVB</TYPE>
-     <DESCRIPTION>Web API Service Binding for Petstore</DESCRIPTION>
+     <DESCRIPTION>Web API Binding for Travel</DESCRIPTION>
      <RESPONSIBLE>DEVELOPER</RESPONSIBLE>
      <MASTER_LANGUAGE>EN</MASTER_LANGUAGE>
     </METADATA>
     <CONTENT>
      <BIND_TYPE_IMPL>
-      <NAME>ZSB_PETSTORE_ODATAV4</NAME>
+      <NAME>ZAPI_TRAVEL_04</NAME>
      </BIND_TYPE_IMPL>
      <BIND_TYPE>ODATA</BIND_TYPE>
      <BIND_TYPE_CATEGORY>1</BIND_TYPE_CATEGORY>
      <BIND_TYPE_VERSION>V4</BIND_TYPE_VERSION>
      <SERVICES>
       <item>
-       <SERVICE_NAME>ZSD_PETSTORE</SERVICE_NAME>
+       <SERVICE_NAME>ZUI_TRAVEL_04</SERVICE_NAME>
        <SERVICE_CONTENT>
         <item>
          <SERVICE_VERSION>0001</SERVICE_VERSION>
          <RELEASE_STATE>NOT_RELEASED</RELEASE_STATE>
          <SRVD_REF>
-          <URI>/sap/bc/adt/ddic/srvd/sources/zsd_petstore</URI>
+          <URI>/sap/bc/adt/ddic/srvd/sources/zui_travel_04</URI>
           <TYPE>SRVD/SRV</TYPE>
-          <NAME>ZSD_PETSTORE</NAME>
+          <NAME>ZUI_TRAVEL_04</NAME>
          </SRVD_REF>
          <BIND_TYPE_DATA>
           <CONTENT>

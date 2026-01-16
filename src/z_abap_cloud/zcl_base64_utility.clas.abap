@@ -14,10 +14,17 @@ CLASS zcl_base64_utility DEFINITION
 
 ENDCLASS.
 
+CLASS zcl_base64_utility IMPLEMENTATION.
 
+  METHOD encode_text_base64.
 
-CLASS ZCL_BASE64_UTILITY IMPLEMENTATION.
+    " Base64 encode the input text
+    DATA utf8_xstring TYPE xstring.
 
+    utf8_xstring = cl_web_http_utility=>encode_utf8( iv_text ).
+    rv_encoded = cl_web_http_utility=>encode_x_base64( utf8_xstring ).
+
+  ENDMETHOD.
 
   METHOD decode_text_base64.
 
@@ -29,14 +36,4 @@ CLASS ZCL_BASE64_UTILITY IMPLEMENTATION.
 
   ENDMETHOD.
 
-
-  METHOD encode_text_base64.
-
-    " Base64 encode the input text
-    DATA utf8_xstring TYPE xstring.
-
-    utf8_xstring = cl_web_http_utility=>encode_utf8( iv_text ).
-    rv_encoded = cl_web_http_utility=>encode_x_base64( utf8_xstring ).
-
-  ENDMETHOD.
 ENDCLASS.
