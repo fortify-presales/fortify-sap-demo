@@ -8,9 +8,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_POST_MAIN IMPLEMENTATION.
-
-
+CLASS zcl_post_main IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
     TRY.
         DATA(api) = NEW zcl_post_api( ).
@@ -40,4 +38,5 @@ CLASS ZCL_POST_MAIN IMPLEMENTATION.
         out->write( exc->get_text(  ) ).
     ENDTRY.
   ENDMETHOD.
+
 ENDCLASS.
